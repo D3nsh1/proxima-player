@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.22.1)
+project(miku_audio)
+add_library(miku_audio SHARED AAudioEngine.cpp)
+target_link_libraries(miku_audio aaudio log android)
+target_compile_features(miku_audio PRIVATE cxx_std_20)

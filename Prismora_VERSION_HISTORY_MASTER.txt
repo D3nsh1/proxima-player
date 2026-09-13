@@ -1,0 +1,674 @@
+PRISMORA — KOMPLETNÝ PREHĽ VERZIÍ + MASTER ROADMAP
+====================================================
+
+Aktualizované: 2026-09-04
+
+Tento súbor je hlavný pracovný prehľad projektu Prismora:
+- čo bolo pridané v jednotlivých verziách,
+- čo je aktuálne hotové / experimentálne,
+- čo ešte treba doplniť,
+- čo bude FREE / PRO,
+- aktuálne pravidlá prístupu k funkciám.
+
+DÔLEŽITÉ PRE VÝVOJ — AKTUALIZOVANÉ VO v3.12.3:
+- Paywall, Pro popup, unlock stav a billing boli z development verzie odstránené.
+- Každá implementovaná funkcia sa otvára priamo.
+- Nedokončené položky roadmapy sa zobrazujú iba ako PLANNED, nie ako zamknuté tlačidlá.
+- O prípadnej release monetizácii sa rozhodne až neskôr; aktuálny build nemá feature gates.
+
+======================================================================
+HISTÓRIA VERZIÍ
+======================================================================
+
+v3.13.1 — Cassette hold-to-fast-forward
+- Cassette téma má vlastný modrý personal-stereo deck namiesto seek slidera.
+- Kazeta zobrazuje album cover, track/artist, čas, cievky a priebeh pásky.
+- Seek je iba fast-forward: podržať HOLD ≫ aspoň 350 ms, pustiť a vykonať jeden seek.
+- Cyberpunk hlavná farba zmenená na žltú; cyan ostáva sekundárny neon.
+
+v3.13.0 — Equalizer + DSP + themes
+- Equalizer pridaný priamo do spodnej navigácie.
+- PCM DSP pre 16/24/32-bit a float PCM.
+- Parametric/graphic EQ do 24 pásiem: peak, shelves, low/high pass.
+- Preamp, compressor, limiter, crossfeed.
+- Presety, AutoEQ/Equalizer APO import/export a per-device profily.
+- Pri zapnutom DSP sa vypne bit-perfect trasa a zobrazí DSP ACTIVE.
+- Visualizer Bars / Line / Radial / Minimal s opakovane použitými 1024-point FFT buffermi.
+- Player: Lyrics naľavo, Repeat napravo; duplicitné Lyrics, Playback a Shuffle tlačidlá odstránené.
+- Pridané Prismora Glass/OLED, Insomnia, Cyberpunk, CRT, Y2K, Vaporwave, Cassette, MiniDisc a Portable Player témy.
+
+v3.6 — Navigation + Spotify základ
+- Stabilná verzia, z ktorej sa ďalej vychádzalo.
+- Upravená navigácia.
+- Spotify sekcia ako remote / Web API experiment.
+- Lokálny prehrávač ostal hlavnou časťou aplikácie.
+
+v3.7 — Spotify Library + in-app player experiment
+- Liked Songs / Playlists / Albums / Artists.
+- Rozšírené OAuth scopes.
+- Pokus o Web Playback SDK priamo v Prismore.
+- Android WebView + Spotify Web Playback SDK sa ukázal ako nespoľahlivý.
+
+v3.7.1 — Miku navigation peek
+- Miku peek iba pri Miku téme.
+- Cca 50 % náhodná šanca.
+- Statický PNG peek.
+- Neskôr odstránené; cieľ bola skutočná animácia.
+
+v3.8 — Native Spotify / librespot experiment
+- WebView playback odstránený.
+- Rust/librespot backend.
+- Rust/JNI bridge.
+- build_native_spotify.ps1.
+- Rust + Android NDK + MSVC workflow.
+- Miku peek odstránený.
+
+v3.8.1 — Pair Playback
+- Spotify Connect discovery / mDNS.
+- Prismora sa zobrazovala medzi Spotify zariadeniami.
+- Ukladanie Spotify Connect credentials.
+- Native build bez cargo-ndk.
+
+v3.8.2 — Spotify login5 fix
+- Upravená librespot Android client identity.
+- Zjednotený discovery/session device ID.
+- login5 stále vracal INVALID_CREDENTIALS.
+
+v3.8.3 — Current librespot dev
+- Prechod na aktuálnejšiu librespot dev vetvu.
+- ARM64/ARM32 build fungoval.
+- Login problém ostal.
+
+v3.8.4 — Playback OAuth experiment
+- Web API login a playback login oddelené.
+- AUTHORIZE PLAYBACK.
+- Experiment ostal nestabilný.
+
+v3.9 — Local Media Notification / Spotify removed
+- Spotify odstránené z produktu.
+- Klasická Android media notification.
+- Album cover.
+- Previous / Play-Pause / Next / Shuffle.
+- Jedno action miesto úmyselne voľné.
+- MediaSession progress / seek.
+- Kliknutie na notification otvorí Prismoru.
+
+v3.9.1 — Prismora package rename
+- Android package: com.prismora.player
+- Namespace/applicationId upravené.
+- Kotlin packages/importy upravené.
+- JNI názvy upravené.
+
+v3.9.2 — Notification compile fix
+- Opravený MediaSession.Callback onCustomAction signature.
+
+v3.9.3 — Uri compile fix
+- Pridaný chýbajúci import android.net.Uri.
+
+v3.10.0 — Persona 3 Reload menu theme
+- P3R modro-biele diagonálne panely.
+- Ružové/červené akcenty.
+- Cyan/ružové shards.
+- Clock motif.
+- Makoto Yuki v pozadí.
+- Cut-corner album art.
+- P3R Now Playing panel.
+- P3R playback buttons.
+- Upravená spodná navigácia.
+- Rýchlejší horizontal transition.
+
+v3.10.1 — P3R compile fix
+- Opravené Compose Canvas farby White / Pink / Cyan.
+
+v3.10.2 — P3R Library / Queue / Visualizer
+- Aktuálna skladba zvýraznená v Library aj Queue.
+- White active panel + pink accent + PLAYING badge.
+- Visualizer viac P3R štýl.
+- Menší reflection.
+- Znížený smoothing.
+
+v3.11.0 — Audio Routing
+- Settings -> Audio.
+- Auto / Native bit-perfect / Compatibility.
+- Android 14+ AudioMixerAttributes.MIXER_BEHAVIOR_BIT_PERFECT.
+- Exact match sample rate / PCM encoding / channels.
+- Compatibility fallback ON/OFF.
+- AAudio Exclusive sa už automaticky neoznačuje ako bit-perfect.
+- USB device screen ukazuje native bit-perfect formáty exponované Androidom.
+- Live route status: backend/device/rate/bits/format.
+- Bluetooth sa správne nepovažuje za bit-perfect.
+- AUX/speaker ostávajú compatibility route.
+
+ZNÁMY LIMIT v3.11:
+- WAV PCM zachováva 16/24/32-bit.
+- MP3/AAC a aktuálny MediaCodec FLAC path môžu končiť ako 16-bit PCM.
+- DSF je zatiaľ konvertovaný na 44.1 kHz float PCM.
+- Preto treba nový audio-engine rewrite.
+
+======================================================================
+MASTER ROADMAP — VŠETKO ČO EŠTE TREBA DOPLNIŤ
+======================================================================
+
+A. AUDIO ENGINE — HLAVNÁ PRIORITA
+- Prerobiť audio engine podobným smerom ako Flick.
+- Rust/native decoder.
+- Symphonia alebo podobný permissive decoder.
+- Zachovať source sample rate.
+- Zachovať bit depth tam, kde je to možné.
+- Žiadny povinný resampling.
+- Žiadny nútený upsampling na maximum DAC-u.
+- FLAC / ALAC / WAV / MP3 / AAC / M4A / DSF.
+- Gapless.
+- Exact sample-rate switching.
+- Direct USB Audio Class 2.0 backend.
+- USB permission flow.
+- Hot-plug/reconnect.
+- DAC capability detection.
+- Underrun monitoring.
+- Buffer/latency settings.
+- USB diagnostics.
+- Android Native Bit-Perfect fallback.
+- Oboe/AAudio compatibility backend.
+- Bluetooth/AUX/speaker/older Android cez compatibility.
+- Speaker/AUX default profil môže byť 16-bit / 44.1 kHz.
+- Moondrop MAY používať podľa source formátu a reálnych capabilities, nie nasilu 384 kHz.
+- DSD Native.
+- DoP.
+- DSD -> PCM len ak treba alebo používateľ zvolí.
+- Jasný status: USB DIRECT / ANDROID BIT-PERFECT / DSP ACTIVE / RESAMPLED / COMPATIBILITY / BLUETOOTH CODEC.
+- Ak je EQ/DSP zapnutý, nesmie sa zobrazovať BIT-PERFECT.
+
+B. SETTINGS -> AUDIO
+- Routing:
+  Auto / USB Direct / Android Native Bit-Perfect / Compatibility.
+- Fallback ON/OFF.
+- Follow source sample rate.
+- Manual sample rate override.
+- Bit-depth preference: Follow source / 16 / 24 / 32.
+- DSD mode: Auto / Native / DoP / PCM.
+- Buffer size.
+- Latency mode.
+- Direct/exclusive controls.
+- DAC capabilities.
+- Current source format.
+- Current output format.
+- Current negotiated format.
+- Bit-perfect status.
+- Underruns.
+- Reconnect behavior.
+- Per-output profiles.
+- Per-device profiles.
+- Automatické prepínanie profilu pri pripojení MAY/JBL/iného zariadenia.
+
+C. EQ / DSP
+- Equalizer314-level funkčnosť, ale vlastná implementácia.
+- Parametric EQ.
+- Graphic EQ.
+- Peak/bell.
+- Low shelf / High shelf.
+- Low pass / High pass.
+- Frequency / Gain / Q.
+- Live response graph.
+- AutoEQ.
+- Headphone presets.
+- Per-device EQ profiles.
+- Automatic device EQ switching.
+- Custom presets.
+- Save/rename/delete.
+- Import/export.
+- APO-style kompatibilita tam, kde je praktická.
+- Preamp.
+- Multiband compressor.
+- Limiter.
+- Visual compressor feedback.
+- Limiter metering.
+- Crossfeed.
+- ReplayGain.
+- Advanced resampler.
+- Dither.
+- DSP bypass.
+- A/B compare.
+- Neskôr per-track/per-album možnosti.
+
+Development access:
+- implementované EQ/DSP funkcie sa otvárajú priamo
+- bez popupu, unlock stavu a billing systému
+
+D. LOCAL PLAYER / PLAYBACK
+- Play/Pause.
+- Previous/Next.
+- Shuffle.
+- Sleep timer.
+- Queue.
+- Seek.
+- Gapless.
+- Stabilný skip.
+- Regresne otestovať starý bug po skipnutí.
+- Queue persistence.
+- Queue reorder.
+- Remove from queue.
+- Play next.
+- Add to queue.
+- Repeat Off / All / One.
+- Local favorite/like.
+- Restore last track.
+- Voliteľný resume position.
+- Crossfade neskôr.
+
+E. MEDIA NOTIFICATION / LOCKSCREEN
+- Album cover.
+- Previous.
+- Play/Pause.
+- Next.
+- Shuffle.
+- Jedno action miesto nechať voľné.
+- Seek/progress.
+- Title/artist.
+- MediaSession.
+- Lockscreen controls.
+- Bluetooth/headset media buttons.
+- Hardware next/previous/play/pause.
+- Správny update po skip/seek/shuffle.
+
+F. LIBRARY
+- Tracks.
+- Folders.
+- Artists.
+- Albums.
+- Genres.
+- Playlists.
+- Skutočná folder hierarchy.
+- Artist -> Albums -> Tracks.
+- Album -> Tracks.
+- Genre browsing.
+- Sorting:
+  title/artist/album/track number/date added/duration/year/folder/recently played/most played.
+- Album cover v Library.
+- Artwork cache.
+- Fallback artwork.
+- Long press metadata:
+  resolution/format/codec/sample rate/bit depth/channels/duration/path/file size/track/disc/current output.
+- Player menu:
+  Go to Folder / Artist / Album.
+
+G. PLAYLISTS / IMPORTER
+- Create/rename/delete playlist.
+- Add/remove/reorder.
+- Vlastné playlistPosition.
+- playlistPosition nezávislé od disc/track number.
+- Import/export M3U/M3U8.
+- Playlist metadata import.
+- Local matching: artist + title + duration.
+- Found/Missing status.
+- Watched import/download folder.
+- Auto-match nového lokálneho súboru.
+- File organization modes:
+  1. Reference only
+  2. Copy to playlist folder
+  3. Organized mode:
+     - albumový track -> COPY
+     - nový standalone import -> MOVE
+     - celý album ostáva pokope
+     - playlist z albumu copy/reference
+- Plugin/source architecture.
+- External client integration.
+- Manual external search/open.
+- Watch folder + auto-import.
+- Core player nemá byť závislý od downloadera.
+
+H. LYRICS
+- Plain lyrics.
+- Synced lyrics.
+- Lyrics button v playeri.
+- Tap line -> seek.
+- Auto-scroll.
+- Highlight current line.
+- Lyrics cache.
+- Offline lyrics.
+- Manual import/edit neskôr.
+- Provider fallback podľa licenčných/API možností.
+
+I. VISUALIZER
+- Bar spectrum.
+- Water reflection.
+- Nižší smoothing.
+- 120 Hz-friendly.
+- Presnejší FFT.
+- Lepšie frequency bands.
+- Adjustable smoothing.
+- Attack/release.
+- Sensitivity/gain.
+- Number of bars.
+- Reflection amount.
+- Theme-specific presets.
+- Waveform seekbar.
+- Visualizer modes:
+  bars / waveform / line spectrum / radial / minimal audiophile meter.
+- Lite visualizer.
+
+J. UI / NAVIGATION
+- Swipe left/right po bottom bare.
+- Swipe up v playeri -> Queue.
+- Žiadny "swipe/tap for queue" label.
+- Album art držať v nižšej správnej výške.
+- Output indicator -> Settings/Audio.
+- Settings cez logo.
+- Player three-dot menu Folder/Artist/Album.
+- 120 Hz.
+- Menej stutteru.
+- Menej recomposition.
+- Stabilnejšie transitions.
+
+K. SETTINGS ŠTRUKTÚRA
+Settings
+- Appearance
+  - Theme
+  - Accent
+  - Background
+  - Cover Art behavior
+  - Now Playing layout
+- Audio
+  - Routing
+  - USB Direct
+  - Native Bit-Perfect
+  - Compatibility
+  - Output device
+  - DAC capabilities
+  - EQ/DSP
+  - Device profiles
+- Library
+  - Scan folders
+  - Cache
+  - Sort
+  - Metadata
+  - Playlist Importer
+  - File organization
+- Playback
+  - Gapless
+  - Repeat
+  - Shuffle
+  - Sleep defaults
+  - Resume
+- Visualizer
+  - Style
+  - Bars
+  - Smoothing
+  - Reflection
+  - Sensitivity
+- Performance
+  - Lite mode
+  - Auto Lite
+  - Animation quality
+  - Cache limits
+- Pro
+  - status
+  - feature overview
+  - reálny purchase až pri release
+
+L. THEMES / APPEARANCE
+Generic:
+- Prismora Glass.
+- OLED.
+- Cover Art Dynamic.
+- Cover-art-as-background.
+- Normikov album-color adaptive.
+- PS4-like wave + OLED black.
+
+Theme concepts:
+- Miku.
+- Teto.
+- Neru.
+- Yi Xi / Pull the Trigger direction.
+- Kaito.
+- Meiko.
+- Insomnia.
+- Inabakumori.
+- Persona 3 Reload / Makoto Yuki.
+- Persona 4 Golden / Yu Narukami.
+- Persona 5 Royal / Ren Amamiya.
+
+P3R:
+- aktuálne čiastočne implementovaná
+- finálny polish až na konci po core audio/player
+
+Theme features:
+- Character behind album cover.
+- Theme-specific geometry.
+- Theme-specific visualizer.
+- Theme-specific backgrounds.
+- Dynamic album colors.
+- Custom accent.
+- Custom gradients.
+- Custom background.
+- Own artwork/character.
+- Now Playing layout customization.
+
+Miku peek:
+- ZATIAĽ ODSTRÁNENÉ.
+- Statický PNG nechceme.
+- 3D/animated peek zatiaľ neplánovať.
+
+Theme Store neskôr:
+- .prismtheme.
+- User-created themes.
+- Import/export.
+- Cyberpunk / CRT / Y2K / Vaporwave / Glassmorphism / Cassette / MiniDisc / Walkman-inspired.
+- Každá implementovaná téma sa počas vývoja vyberá priamo.
+
+M. PERFORMANCE / CACHE
+- Library cache.
+- Album art cache.
+- Lyrics cache.
+- Metadata cache.
+- Wrapped/stats cache.
+- Startup loading bar.
+- Loaded X tracks.
+- Scan progress.
+- Background rescan.
+- Lazy artwork loading.
+- Správna bitmap size.
+- Menej heavy recomposition.
+- Visualizer optimization.
+- Theme animation optimization.
+- 120 Hz support.
+- Fix fast-scroll stutter.
+
+Lite Mode:
+- Settings -> Performance -> Lite mode.
+- Znížiť/vypnúť blur, heavy glass, animated background, reflection, heavy visualizer, cover animation, drahé transitions, veľké artwork/cache.
+- Core audio kvalita/playback/library/USB ostávajú.
+- Auto Lite recommendation pre slabšie telefóny.
+
+N. STATS / WRAPPED / MIXES
+- Play count.
+- Listen duration.
+- Skip count.
+- Last played.
+- First played.
+- Device/headphones used.
+- Playback quality.
+- Weekly Recap.
+- Monthly Recap.
+- Yearly recap neskôr.
+- Top artist/album/track.
+- Listening minutes.
+- Most used headphones.
+- Highest playback quality.
+- Favorite listening hour/day.
+- Night Mix.
+- Recently Obsessed.
+- Forgotten Favorites.
+- History-based mixes.
+- Most Played.
+- Recently Added.
+- Long Time No Play.
+- Share cards:
+  Instagram / TikTok / Discord / image export.
+- Veľká časť stats/mixes ostáva FREE.
+
+O. SMART PLAYLISTS — PLANNED
+- Recently Added.
+- Most Played.
+- Recently Played.
+- Forgotten Favorites.
+- High-Res only.
+- Lossless only.
+- By headphone/device.
+- By genre.
+- By year.
+- By listening time.
+- Custom rules.
+- Po implementovaní budú počas vývoja prístupné priamo.
+
+P. WIDGETS
+FREE:
+- Basic playback widget.
+- Album art.
+- Previous/Play/Next.
+
+ADVANCED:
+- Advanced widgets.
+- Custom sizes.
+- Multiple layouts.
+- Theme-matched.
+- Queue/track info.
+- Visualizer/waveform podľa možností.
+- Development build: priamy prístup bez gate.
+
+Q. CLOUD / HOME LIBRARY — NESKÔR
+- Navidrome.
+- Subsonic.
+- Jellyfin.
+- Plex.
+- WebDAV.
+- SMB.
+- Rovnaká Library UI.
+- Cache/offline podľa možností.
+- Zachovať source quality podľa backendu.
+
+R. WINDOWS / LINUX / CROSS-DEVICE — DLHODOBÝ PLÁN
+Windows:
+- Desktop Prismora.
+- Local music.
+- USB DAC.
+- Phone ako remote.
+
+Linux:
+- najprv CLI/TUI alebo jednoduchý client.
+- neskôr plný desktop.
+
+Account/link devices neskôr:
+- Phone + PC.
+- Remote control.
+- Sync playlists.
+- Sync stats.
+- Sync settings/themes.
+- Transfer music medzi vlastnými zariadeniami.
+
+S. EXTERNAL IMPORT WORKFLOW
+- Seeker Android ako externý client.
+- Soulseek Windows client ako externý client.
+- Otvoriť externé vyhľadávanie manuálne.
+- Watch download/import folder.
+- Auto-detect completed audio.
+- Match metadata.
+- Import do Library.
+- Zaradiť podľa playlistPosition.
+- Používateľ má používať zdroje/súbory, na ktoré má právo.
+
+T. CURRENT ACCESS
+- Všetky implementované funkcie sú dostupné priamo.
+- Parametric/Graphic EQ, AutoEQ import, device EQ profiles, compressor, limiter, preamp, crossfeed a všetky hotové visualizer/theme režimy nemajú feature gate.
+- Core bit-perfect/direct playback sa nikdy úmyselne nezhoršuje podľa access tieru.
+- Bez reklám.
+- Prípadná release monetizácia zatiaľ nie je súčasťou aplikácie ani development roadmapy.
+
+U. DEVELOPMENT ACCESS — AKTUÁLNE PRAVIDLO
+- Žiadny paywall ani unlock popup.
+- Žiadny Google Play Billing, fake purchase flow ani entitlement stav.
+- Všetky implementované funkcie sú prístupné priamo.
+- Nedokončené funkcie sú jasne označené ako PLANNED a nie sú falošne simulované.
+
+V. BRANDING / GOOGLE PLAY — AŽ PRED RELEASE
+- Package: com.prismora.player
+- Vlastné Prismora logo/icon/default theme.
+- App nemá byť závislá od cudzej značky.
+- Android App Bundle.
+- Signing.
+- Privacy Policy.
+- Data Safety.
+- Content rating.
+- Store listing/screenshots/feature graphic.
+- Closed testing podľa aktuálnych Play pravidiel.
+- Release build momentálne neobsahuje billing plán ani závislosť.
+
+W. QA / TESTY PRED RELEASE
+Android:
+- 10 / 11 / 12 / 13 / 14 / 15 / 16.
+
+Outputs:
+- Speaker.
+- AUX.
+- Wired.
+- Bluetooth.
+- USB DAC.
+- Moondrop MAY.
+
+Audio testy:
+- 16/44.1
+- 16/48
+- 24/44.1
+- 24/48
+- 24/96
+- 24/192
+- 32-bit podľa podpory
+- 384 kHz iba ak source + DAC reálne podporujú
+- FLAC/WAV/ALAC/MP3/AAC/M4A/DSF
+
+Behavior:
+- play/pause/stop/seek/next/previous/shuffle/repeat/sleep
+- unplug/reconnect DAC
+- switch BT <-> USB
+- screen off/lockscreen
+- notification controls
+- app killed/reopened
+- library rescan
+- corrupted metadata
+- missing cover
+- huge library
+- 120 Hz scrolling
+- Lite mode
+
+======================================================================
+AKTUÁLNE PRIORITY
+======================================================================
+
+1. Stabilizovať v3.11 build.
+2. Nový audio engine: native/Rust decoder + správny hi-res PCM.
+3. USB Direct UAC2.
+4. Gapless + stabilný queue/playback.
+5. Dokončiť Settings / Audio.
+6. Library/cache/performance.
+7. EQ/DSP.
+8. Playlist system/importer.
+9. Lyrics.
+10. Wrapped/Mixes.
+11. Lite mode.
+12. Až potom finálne polish themes vrátane P3R.
+13. Rozhodnutie o release monetizácii úplne nakoniec.
+
+======================================================================
+KĽÚČOVÉ PRAVIDLÁ
+======================================================================
+
+- Prismora = primárne LOCAL / AUDIOPHILE music player.
+- Spotify playback už nie je hlavný smer.
+- Core audio kvalita sa nesmie umelo zhoršiť kvôli Pro.
+- Bit-perfect znamená skutočne bez DSP/resamplingu, nie iba Exclusive.
+- Pri EQ zobrazovať DSP ACTIVE, nie BIT-PERFECT.
+- Source sample rate sa defaultne zachováva.
+- DAC sa zbytočne nenúti na maximum 384 kHz.
+- Žiadne reklamy.
+- Pro = jednorazová kúpa.
+- Počas vývoja nie je žiadny paywall ani feature gate.
+- Themes finálne leštiť až po stabilnom core playback/audio.

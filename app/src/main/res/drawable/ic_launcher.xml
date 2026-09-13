@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <path android:fillColor="#050712" android:pathData="M0,0h108v108h-108z"/>
+
+    <!-- Miku Hair Glow -->
+    <path android:fillColor="#4AF6E8" android:pathData="M15,25 Q54,10 93,25 L93,95 Q54,105 15,95 Z" android:alpha="0.1"/>
+
+    <!-- Hair -->
+    <path android:fillColor="#4AF6E8" android:pathData="M22,28 C15,35 10,55 18,85 L32,80 C28,65 28,45 35,38 Z"/>
+    <path android:fillColor="#4AF6E8" android:pathData="M86,28 C93,35 98,55 90,85 L76,80 C80,65 80,45 73,38 Z"/>
+
+    <!-- Face -->
+    <path android:fillColor="#F4FBFF" android:pathData="M54,28 A26,30 0 1 0 54,88 A26,30 0 1 0 54,28"/>
+
+    <!-- Fringe -->
+    <path android:fillColor="#4AF6E8" android:pathData="M32,38 Q54,25 76,38 L72,46 Q54,38 36,46 Z"/>
+
+    <!-- Eyes (Y2K style) -->
+    <path android:fillColor="#FF60C8" android:pathData="M38,55 A7,8 0 1 0 38,71 A7,8 0 1 0 38,55"/>
+    <path android:fillColor="#4AF6E8" android:pathData="M70,55 A7,8 0 1 0 70,71 A7,8 0 1 0 70,55"/>
+
+    <!-- Pupils -->
+    <path android:fillColor="#FFFFFF" android:pathData="M40,58 A2,2 0 1 0 40,62 A2,2 0 1 0 40,58"/>
+    <path android:fillColor="#FFFFFF" android:pathData="M72,58 A2,2 0 1 0 72,62 A2,2 0 1 0 72,58"/>
+
+    <!-- Prismora waveform mark -->
+    <path android:fillColor="#000000" android:pathData="M31,55h6v16h-6z"/>
+    <path android:fillColor="#000000" android:pathData="M41,49h6v28h-6z"/>
+    <path android:fillColor="#000000" android:pathData="M51,44h6v38h-6z"/>
+    <path android:fillColor="#000000" android:pathData="M61,50h6v26h-6z"/>
+    <path android:fillColor="#000000" android:pathData="M71,56h6v14h-6z"/>
+
+    <!-- Blushing -->
+    <path android:fillColor="#FF60C8" android:pathData="M35,75 h6v2h-6z" android:alpha="0.3"/>
+    <path android:fillColor="#FF60C8" android:pathData="M73,75 h6v2h-6z" android:alpha="0.3"/>
+</vector>
